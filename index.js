@@ -18,11 +18,8 @@ console.log("hello");
 const obj = new Tree([1, 2, 3, 4, 6, 8, 9, 9, 15]);
 console.log(obj);
 console.log(obj.find(obj.root, 9));
-console.log(obj.insert(obj.root, 119));
 
-console.log(obj.delete(obj.root, 15));
-
-
-prettyPrint(obj.root);
+console.log(obj.levelOrder([], [], obj.root));
+console.log(obj.preorder([], obj.root));
 
 

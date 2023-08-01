@@ -94,6 +94,92 @@ export default class Tree {
         return this.find(root.right, data);
     }
 
+
+
+
+    //copying
+
+    levelOrder(arr = [], queue = [], root = this.root) {
+      if (root === null) return;
+      // Visit the root
+      arr.push(root.data);
+
+      // Traverse to left and right children -> add to queue
+      queue.push(root.left);
+      queue.push(root.right);
+
+      // Move to next level
+      while (queue.length) {
+        const level = queue[0];
+        queue.shift();
+        this.levelOrder(arr, queue, level)
+      }
+
+      return arr;
+    }
+
+    inorder(arr = [], root = this.root) {
+      if (root === null) return;
+      
+      // Traverse left subtree
+      if (root.left) this.inorder(arr, root.left);
+      
+      // Visit the root
+      arr.push(root.data);
+      
+      // Traverse right subtree
+      if (root.right) this.inorder(arr, root.right);
+     
+      return arr;
+    }
+
+    preorder(arr = [], root = this.root) {
+      if (root === null) return;
+      
+      // Visit the root
+      arr.push(root.data);
+      
+      // Traverse the left subtree
+      if (root.left) this.preorder(arr, root.left);
+      
+      // Traverse the right subTree
+      if (root.right) this.preorder(arr, root.right);
+      
+      return arr;
+    }
+
+    postorder(arr = [], root = this.root) {
+      if (root === null) return;
+
+      // Traverse left subtree
+      if (root.left) this.postorder(arr, root.left);
+      
+      // Traverse right subtree
+      if (root.right) this.postorder(arr, root.right);
+      
+      // Visit the root
+      arr.push(root.data);
+
+      return arr;
+    }
+
+    height(root = this.root) {
+      if (root === null) return 0;
+
+      let lHeight = this.height(root.left);
+      let rHeight = this.height(root.right);
+
+      if (lHeight > rHeight) {
+        return lHeight + 1;
+      } else {
+        return rHeight + 1;
+      }
+    }
+
+   
+
+
+
     //for testing
     prettyPrint = (node, prefix = "", isLeft = true) => {
         if (node === null) {
